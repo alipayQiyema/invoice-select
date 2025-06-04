@@ -1,0 +1,68 @@
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Invoice Components Demo</title> <meta name="referrer" content="no-referrer"> <script type="module" src="build/invoice-select.esm.js"></script> <script nomodule="" src="build/invoice-select.js"></script> <style>body {
+        margin: 0;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 16px;
+      }
+
+      .open-button {
+        padding: 8px 16px;
+        background: #1890ff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }</style> </head> <body> <div class="button-container"> <button class="open-button" onclick="openInvoiceSelectorSingle()">打开发票选择器（单选）</button> <button class="open-button" onclick="openInvoiceSelectorMultiple()">打开发票选择器（多选）</button> </div> <invoice-selector id="invoice-selector-single" appid="" token="" forward="" multiple="false" customheader="{&quot;X-Auth-Fcs&quot;:&quot;xxx&quot;}" customqueryparam="{&quot;param1&quot;:&quot;xxx&quot;}"></invoice-selector> <invoice-selector id="invoice-selector-multiple" appid="" token="" forward="" multiple="true" customheader="{&quot;X-Auth-Fcs&quot;:&quot;xxx&quot;}" customqueryparam="{&quot;param1&quot;:&quot;xxx&quot;}"></invoice-selector> <script>
+      const params = Object.fromEntries(new URLSearchParams(window.location.search));
+      const token = params.token;
+      const appid = params.appid;
+
+      function openInvoiceSelectorSingle() {
+        const invoiceSelector = document.querySelector('#invoice-selector-single');
+        invoiceSelector.setAttribute('token', token);
+        invoiceSelector.setAttribute('appid', appid);
+
+        invoiceSelector.open();
+      }
+
+      // 确定
+      document.querySelector('#invoice-selector-single').addEventListener('onConfirm', event => {
+        console.log('Selected invoices single:', event.detail);
+      });
+
+      // 关闭
+      document.querySelector('#invoice-selector-single').addEventListener('onCancel', event => {
+        console.log('Selected invoices single:', '选票组件关闭事件');
+      });
+
+      // 错误
+      document.querySelector('#invoice-selector-single').addEventListener('onError', event => {
+        console.log('Selected invoices single 错误信息:', event.detail);
+      });
+
+      function openInvoiceSelectorMultiple() {
+        const invoiceSelector = document.querySelector('#invoice-selector-multiple');
+        invoiceSelector.setAttribute('token', token);
+        invoiceSelector.setAttribute('appid', appid);
+        invoiceSelector.open();
+      }
+
+      // 确定
+      document.querySelector('#invoice-selector-multiple').addEventListener('onConfirm', event => {
+        console.log('Selected invoices multiple:', event.detail);
+      });
+
+      // 关闭
+      document.querySelector('#invoice-selector-multiple').addEventListener('onCancel', event => {
+        console.log('Selected invoices multiple:', '选票组件关闭事件');
+      });
+
+      // 错误
+      document.querySelector('#invoice-selector-multiple').addEventListener('onError', event => {
+        console.log('Selected invoices multiple 错误信息:', event.detail);
+      });
+    </script> </body></html>
