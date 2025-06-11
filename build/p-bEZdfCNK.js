@@ -1,0 +1,2 @@
+function t(t,e,r){return(t||"")+(e?` ${e}`:"")+(r?` ${r}`:"")}function e(t){let e={};try{e=JSON.parse(t)}catch(t){return{}}return e}function r(t,e=new FormData,n=""){for(const o in t){if(Object.prototype.hasOwnProperty.call(t,o)){const c=t[o];const f=n?`${n}[${o}]`:o;if(c&&typeof c==="object"&&!Array.isArray(c)){r(c,e,f)}else if(Array.isArray(c)){c.forEach(((t,n)=>{if(typeof t==="object"){r(t,e,`${f}[${n}]`)}else{e.append(`${f}[${n}]`,t)}}))}else{e.append(f,c)}}}return e}export{t as f,r as o,e as s};
+//# sourceMappingURL=p-bEZdfCNK.js.map
